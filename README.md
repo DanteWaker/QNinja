@@ -35,3 +35,11 @@ Repositório do projeto Questões Ninja da disciplina de ACE
    - Para acessar a aplicação django: http://localhost:8000
    - Para acessar a aplicação next: http://localhost:3000
    - Para acessar o schema da API: http://localhost:8000/api/schema/
+
+### Contribuições:
+- [João Rodrigues](https://github.com/JoaoG250)
+- [Eduardo Lúcio](https://github.com/lucioeduardo)
+- [Silvio Henrique](https://github.com/svhenrique)
+- [Raiela Quirino](https://github.com/raiela)
+- [Franklyn Roberto](https://github.com/hadesfranklyn)
+- [Rodrigo Santos](https://github.com/rodrigoosantos99)
