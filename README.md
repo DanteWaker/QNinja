@@ -36,7 +36,7 @@ Repositório do projeto Questões Ninja da disciplina de ACE
    - Para acessar a aplicação next: http://localhost:3000
    - Para acessar o schema da API: http://localhost:8000/api/schema/
 
-### Contribuições:
+## Contribuições:
 - [João Rodrigues](https://github.com/JoaoG250)
 - [Eduardo Lúcio](https://github.com/lucioeduardo)
 - [Silvio Henrique](https://github.com/svhenrique)
