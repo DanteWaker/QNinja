@@ -1,0 +1,48 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgres:13.2
+    env_file:
+      - ./dotenv/db.env
+
+  api:
+    build:
+      context: .
+      dockerfile: ./docker/api.Dockerfile
+    image: qninja-api
+    env_file:
+      - ./dotenv/api.env
+    command: development
+    volumes:
+      - ./api:/home/python/qninja/api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  qcluster:
+    image: qninja-api
+    env_file:
+      - ./dotenv/api.env
+    command: django_q
+    volumes:
+      - ./api:/home/python/qninja/api
+    depends_on:
+      - db
+
+  next:
+    build:
+      context: .
+      dockerfile: ./docker/next.Dockerfile
+      target: next-dev
+    image: qninja-next
+    env_file:
+      - ./dotenv/next.env
+    command: development
+    volumes:
+      - ./next:/home/node/qninja/next
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api

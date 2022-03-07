@@ -1,0 +1,44 @@
+version: "3.7"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./docker/api.Dockerfile
+    image: qninja-api:1.0
+    env_file:
+      - ./dotenv/api.prod.env
+    command: production
+    volumes:
+      - ./api/staticfiles:/home/python/qninja/api/staticfiles
+      - ./api/media:/home/python/qninja/api/media
+
+  qcluster:
+    image: qninja-api:1.0
+    env_file:
+      - ./dotenv/api.prod.env
+    command: django_q
+
+  next:
+    build:
+      context: .
+      dockerfile: ./docker/next.Dockerfile
+      target: next-prod
+    image: qninja-next:1.0
+    env_file:
+      - ./dotenv/next.prod.env
+    command: production
+    depends_on:
+      - api
+
+  nginx:
+    restart: unless-stopped
+    image: nginx:latest
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./api/staticfiles:/home/python/qninja/api/staticfiles
+      - ./api/media:/home/python/qninja/api/media
+    ports:
+      - "80:80"
+    depends_on:
+      - next
